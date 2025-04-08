@@ -70,6 +70,7 @@ import com.facebook.react.common.build.ReactBuildConfig;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.UIManagerHelper;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.events.ContentSizeChangeEvent;
@@ -171,8 +172,8 @@ public class RNX5WebViewManager extends SimpleViewManager<WebView> {
 
   protected static void dispatchEvent(WebView webView, Event event) {
     ReactContext reactContext = (ReactContext) webView.getContext();
-    EventDispatcher eventDispatcher =
-      reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
+    UIManagerModule uiManager = reactContext.getNativeModule(UIManagerModule.class);
+    EventDispatcher eventDispatcher = UIManagerHelper.getEventDispatcher(reactContext, webView.getId());
     eventDispatcher.dispatchEvent(event);
   }
 
@@ -1253,7 +1254,7 @@ public class RNX5WebViewManager extends SimpleViewManager<WebView> {
      */
     public RNX5WebView(ThemedReactContext reactContext) {
       super(reactContext);
-      this.createCatalystInstance();
+//      this.createCatalystInstance();
       progressChangedFilter = new ProgressChangedFilter();
     }
 
