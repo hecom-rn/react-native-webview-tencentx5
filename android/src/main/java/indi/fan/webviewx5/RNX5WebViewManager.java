@@ -172,7 +172,6 @@ public class RNX5WebViewManager extends SimpleViewManager<WebView> {
 
   protected static void dispatchEvent(WebView webView, Event event) {
     ReactContext reactContext = (ReactContext) webView.getContext();
-    UIManagerModule uiManager = reactContext.getNativeModule(UIManagerModule.class);
     EventDispatcher eventDispatcher = UIManagerHelper.getEventDispatcher(reactContext, webView.getId());
     eventDispatcher.dispatchEvent(event);
   }
